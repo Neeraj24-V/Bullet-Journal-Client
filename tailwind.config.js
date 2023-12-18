@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         Recursive: "Recursive"
+      },
+      backgroundImage: {
+        landing_bg: 'url("./src/assets/landing_bg.jpg")'
       }
     },
   },

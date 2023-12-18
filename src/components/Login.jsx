@@ -1,8 +1,29 @@
 import React from "react";
 import imgSrc from "../assets/login_bg.jpg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const { email, password } = formData;
+    if (!email || !password) {
+      alert("Please fill out all fields");
+      return;
+    }
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/journal/auth/login",
+      formData
+    );
+    console.log(response);
+  }
+
   return (
     <section className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -32,22 +53,34 @@ function Login() {
               type="text"
               placeholder="Email"
               id="email"
+              value={formData.email}
+              onChange={(e) => {
+                setFormData({ ...formData, email: e.target.value });
+              }}
               className="outline-none bg-transparent py-2 px-4 w-full mt-2 border-b border-black placeholder:text-slate-400 font-Recursive placeholder:font-normal"
             />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               id="password"
-              className="outline-none  py-2 px-4 w-full mt-3 placeholder:text-slate-400 border-b border-black font-semibold font-Recursive placeholder:font-normal"
+              value={formData.password}
+              onChange={(e) => {
+                setFormData({ ...formData, password: e.target.value });
+              }}
+              className="outline-none py-2 px-4 w-full mt-3 placeholder:text-slate-400 border-b border-black font-semibold font-Recursive placeholder:font-normal"
             />
-            <button className="font-Recursive text-center w-full font-semibold mt-10 bg-black py-2 text-white hover:bg-slate-800">
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="font-Recursive text-center w-full font-semibold mt-10 bg-black py-2 text-white hover:bg-slate-800 hover:bg-yellow-600"
+            >
               Login
             </button>
             <p className="text-[12px] mt-2 text-center text-slate-400">
               Don't have an account?{" "}
               <Link
                 to="/register"
-                className=" text-black font-Recursive font-semibold hover:underline"
+                className=" text-black font-Recursive font-semibold hover:underline hover:text-yellow-600"
               >
                 Register
               </Link>
