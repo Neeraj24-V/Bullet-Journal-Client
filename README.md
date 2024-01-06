@@ -1,8 +1,16 @@
-# React + Vite
+This is **_Bullet Journal Application for Web_**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+What's Done till now:-
+=> Created ContentPage, LandingPage, RegisterPage, LoginPage, Navbar and also a component
+to render lists.
 
-Currently, two official plugins are available:
+=> The querying is done using the logged in user-id.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+What's to be done:-
+=> The querying should be done using the logged in user-id but the rendering of the data should
+be based on the task/event/note created.
+
+=> Basically it should be a grid of boxes with just dates on top to indicate which date it belongs to.
+
+=> After clicking on specific box with a date then it shows a page where you can edit and modify
+all your tasks, events, and notes.

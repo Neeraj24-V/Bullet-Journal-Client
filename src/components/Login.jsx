@@ -3,8 +3,11 @@ import imgSrc from "../assets/login_bg.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,9 +22,17 @@ function Login() {
     }
     const response = await axios.post(
       "http://localhost:8080/api/v1/journal/auth/login",
-      formData
+      formData,
     );
     console.log(response);
+    const { username, id } = response.data.payload.user;
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("userEmail", response.data.payload.user.email);
+    localStorage.setItem("username", username);
+    localStorage.setItem("id", id);
+    if (response.status === 200) {
+      navigate("/journal");
+    }
   }
 
   return (
@@ -72,7 +83,7 @@ function Login() {
             <button
               type="button"
               onClick={handleSubmit}
-              className="font-Recursive text-center w-full font-semibold mt-10 bg-black py-2 text-white hover:bg-slate-800 hover:bg-yellow-600"
+              className="font-Recursive text-center w-full font-semibold mt-10 bg-black py-2 text-white hover:bg-yellow-600"
             >
               Login
             </button>
