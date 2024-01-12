@@ -24,7 +24,7 @@ function Content() {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `http://localhost:8080/api/v1/journal/${id}`,
+        `https://bullet-journal-model-api.onrender.com/api/v1/journal/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

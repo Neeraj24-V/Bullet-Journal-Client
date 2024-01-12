@@ -41,8 +41,8 @@ function Register() {
       return;
     }
     const response = await axios.post(
-      "http://localhost:8080/api/v1/journal/auth/register",
-      formData
+      "https://bullet-journal-model-api.onrender.com/api/v1/journal/auth/register",
+      formData,
     );
     if (response.status === 201) {
       navigate("/login");

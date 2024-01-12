@@ -21,7 +21,7 @@ function Login() {
       return;
     }
     const response = await axios.post(
-      "http://localhost:8080/api/v1/journal/auth/login",
+      "https://bullet-journal-model-api.onrender.com/api/v1/journal/auth/login",
       formData,
     );
     console.log(response);
