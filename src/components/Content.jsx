@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import CreateItems from "./CreateItems";
 function Content() {
   const [value, setValue] = useState([]);
+  const [trigger, setTrigger] = useState(false);
 
   const groupData = (data) => {
     let groupedData = {};
@@ -18,56 +19,53 @@ function Content() {
     return groupedData;
   };
 
-  const fectchData = async () => {
-    try {
-      const id = localStorage.getItem("id");
-      const token = localStorage.getItem("token");
-
-      const response = await axios.get(
-        `https://bullet-journal-model-api.onrender.com/api/v1/journal/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      const { data } = response.data;
-      // console.log(data);
-      const groupedData = groupData(data);
-      // console.log(groupedData);
-      setValue(groupedData);
-    } catch (err) {
-      if (err.response && err.response.status === 401) {
-        navigate("/login");
-      } else {
-        console.log("Error fetching data: ", err.message);
-      }
-    }
-  };
-
   useEffect(() => {
+    const fectchData = async () => {
+      try {
+        const id = localStorage.getItem("id");
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(
+          `https://bullet-journal-model-api.onrender.com/api/v1/journal/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const { data } = response.data;
+        // console.log(data);
+        const groupedData = groupData(data);
+        // console.log(Object.entries(groupedData));
+        setValue(groupedData);
+      } catch (err) {
+        if (err.response && err.response.status === 401) {
+          navigate("/login");
+        } else {
+          console.log("Error fetching data: ", err.message);
+        }
+      }
+    };
     fectchData();
-  }, []);
+  }, [trigger]);
 
-  // value.forEach((value, key) => {
-  //   console.log(key);
-  // });
-
-  // const required = Array.from(values, ([key, value]) => ({key, value}))
-  // console.log(required)
-  // let dates = new Set();
-  // value.forEach((ele, key) => {
-  //   dates.add(ele.date);
-  // });
-  // dates = Array.from(dates)
   // console.log(value);
+  let entries = Object.entries(value);
+
+  // Sort the entries by date
+  entries.sort((a, b) => new Date(b[0]) - new Date(a[0]));
+
+  // Convert the sorted entries back to an object
+  let sortedData = Object.fromEntries(entries);
+
+  console.log(sortedData);
 
   return (
     <section className="bg-slate-50">
       <Navbar />
-      <CreateItems />
+      <CreateItems triggerFetch={setTrigger}/>
       <div className="p-8 w-full bg-slate-50 grid grid-cols-3 gap-8 border-white">
-        <DisplayItem value={value} />
+        <DisplayItem value={sortedData} />
       </div>
     </section>
   );

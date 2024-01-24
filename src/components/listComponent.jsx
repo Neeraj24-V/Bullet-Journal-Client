@@ -16,7 +16,7 @@ function List({ val }) {
     <>
       {Object.entries(val).map(([key, val]) => {
         return (
-          <li key={val._id} className="px-4">
+          <li key={val._id} className="px-4 hover:scale-110">
             {getSymbols(val.dataType)} {val.val}
           </li>
         );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-function CreateItems() {
+function CreateItems({ triggerFetch }) {
   const [inputValue, setInputValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -26,8 +26,11 @@ function CreateItems() {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      },
+      }
     );
+    if (response.status === 200) {
+      triggerFetch((prevState) => !prevState);
+    }
     console.log(response.data);
   };
 
