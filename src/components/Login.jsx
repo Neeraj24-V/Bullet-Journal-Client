@@ -37,12 +37,12 @@ function Login() {
 
   return (
     <section className="w-full h-screen flex items-start">
-      <div className="relative w-1/2 h-full flex flex-col">
+      <div className="xs:hidden md:hidden lg:block w-1/2 relative h-full flex flex-col">
         <div className="absolute top-[25%] left-[10%] w-[70%] flex flex-col">
           <h1 className="text-4xl text-white font-Recursive font-bold">
             Journal your ideas and prioritize tasks.
           </h1>
-          <p className="mt-2 text-slate-50 font-sans">
+          <p className="mt-6 text-slate-50 font-sans">
             An effective way to weed out distractions and help you gain control
             over your time to be more productive.
           </p>
@@ -54,8 +54,8 @@ function Login() {
         />
       </div>
 
-      <div className="w-1/2 h-full bg-white flex flex-col justify-center items-center p-20">
-        <div className="w-[70%] flex flex-col p-8 shadow-xl">
+      <div className="xs:w-full xs:px-6 md:w-full md:px-16 lg:w-1/2  h-full bg-white flex flex-col justify-center items-center p-20">
+        <div className="xs:w-full lg:w-[70%] flex flex-col p-8 shadow-xl">
           <h3 className="mb-4 text-2xl font-semibold font-Recursive">Login</h3>
           <p className="text-sm mb-2 font-sans">Please enter your details</p>
 

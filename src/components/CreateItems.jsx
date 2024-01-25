@@ -35,29 +35,31 @@ function CreateItems({ triggerFetch }) {
   };
 
   return (
-    <div className="mx-8 mt-8 h-12 rounded-md font-Recursive">
+    <div className="xs:flex xs:flex-col xs:w-full xs:my-3 xs:px-6 md:px-6 xs:h-auto xs:items-center xs:justify-center lg:flex-row lg:justify-start xs:gap-3 lg:m-8 h-12 lg:px-0 rounded-md font-Recursive">
       <input
         type="text"
-        className="h-12 outline-none w-[75%] mr-4 rounded-l-md shadow-lg pl-8"
+        className="xs:w-full xs:pl-4 xs:h-12 lg:h-12 xs:rounded-md xs:mr-0  outline-none lg:w-[73%] mr-4 rounded-l-md shadow-lg pl-8"
         placeholder="Write here"
         id="content"
         value={inputValue}
         onChange={handleInputChange}
       />
-      <label htmlFor="dropdown" className="mr-2 font-semibold">
-        Type:
-      </label>
-      <select
-        className="w-[7%] outline-none bg-slate-50 border-none"
-        value={selectedOption}
-        onChange={handleSelectChange}
-      >
-        <option default>Task</option>
-        <option>Note</option>
-        <option>Event</option>
-      </select>
+      <div className="xs:flex xs:w-full lg:w-[9%] items-center justify-center">
+        <label htmlFor="dropdown" className="lg:mr-3 font-semibold">
+          Type:
+        </label>
+        <select
+          className="lg:w-full xs:w-[30%] md:w-[12%] md:h-12 outline-none bg-slate-50 border-none"
+          value={selectedOption}
+          onChange={handleSelectChange}
+        >
+          <option default>Task</option>
+          <option>Note</option>
+          <option>Event</option>
+        </select>
+      </div>
       <button
-        className="ml-4 text-white bg-black font-bold h-12 w-[11.9%] rounded-r-md hover:bg-yellow-600 hover:text-black"
+        className="lg:ml-4 xs:ml-0 xs:w-[50%]  md:w-[50%] xs:rounded-md text-white bg-black font-bold h-12 lg:w-[10.7%] rounded-r-md hover:bg-yellow-600 hover:text-black"
         onClick={handleClick}
       >
         Create

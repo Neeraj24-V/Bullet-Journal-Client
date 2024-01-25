@@ -9,16 +9,19 @@ function DisplayItem({ value }) {
       {Object.entries(value).map(([key, val]) => {
         let href = `/journal/test/${key}}`;
         return (
-          <Link to={href} key={key}>
-            <div className="h-[400px] flex flex-col p-4 border-black bg-white shadow-lg rounded-md">
-              <h2 className="mb-4 font-Recursive text-xl text-center text-black font-semibold p-2">
-                {key}
-              </h2>
-              <ul>
-                <List val={val} />
-              </ul>
-            </div>
-          </Link>
+          // <Link to={href} key={key}>
+          <div
+            key={key}
+            className="xs:h-auto md:h-[300px] lg:h-[400px] flex flex-col p-4 border-black bg-white shadow-lg rounded-md"
+          >
+            <h2 className="mb-4 font-Recursive text-xl text-center text-black font-semibold p-2">
+              {key}
+            </h2>
+            <ul>
+              <List val={val} />
+            </ul>
+          </div>
+          // </Link>
         );
       })}
     </>

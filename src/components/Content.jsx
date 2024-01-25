@@ -64,7 +64,7 @@ function Content() {
     <section className="bg-slate-50">
       <Navbar />
       <CreateItems triggerFetch={setTrigger}/>
-      <div className="p-8 w-full bg-slate-50 grid grid-cols-3 gap-8 border-white">
+      <div className="p-8 w-full bg-slate-50 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 border-white">
         <DisplayItem value={sortedData} />
       </div>
     </section>

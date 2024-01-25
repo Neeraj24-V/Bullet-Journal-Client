@@ -42,7 +42,7 @@ function Register() {
     }
     const response = await axios.post(
       "https://bullet-journal-model-api.onrender.com/api/v1/journal/auth/register",
-      formData,
+      formData
     );
     if (response.status === 201) {
       navigate("/login");
@@ -52,8 +52,8 @@ function Register() {
 
   return (
     <section className="w-full h-screen flex items-start">
-      <div className="w-1/2 h-full bg-white flex flex-col justify-center items-center p-20">
-        <div className="w-[70%] flex flex-col p-8 shadow-xl">
+      <div className="xs:w-full xs:p-12 md:w-full md:px-24 lg:w-1/2 h-full bg-white flex flex-col justify-center items-center p-20">
+        <div className="xs:w-full md:w-full w-[70%] flex flex-col xs:px-6 md:px-8 p-8 shadow-xl">
           <h3 className="mb-4 text-2xl font-semibold font-Recursive">
             Register
           </h3>
@@ -150,7 +150,7 @@ function Register() {
         </div>
       </div>
 
-      <div className="relative w-1/2 h-full flex flex-col">
+      <div className="relative xs:hidden md:hidden lg:block lg:w-1/2 h-full flex flex-col">
         <div className="absolute top-[25%] left-[10%] w-[70%] flex flex-col">
           <h1 className="text-4xl text-yellow-600 font-Recursive font-bold">
             Journal your ideas and prioritize tasks.
