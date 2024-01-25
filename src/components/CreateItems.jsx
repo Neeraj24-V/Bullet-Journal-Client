@@ -3,7 +3,7 @@ import axios from "axios";
 
 function CreateItems({ triggerFetch }) {
   const [inputValue, setInputValue] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("Task");
 
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
@@ -31,6 +31,7 @@ function CreateItems({ triggerFetch }) {
     if (response.status === 200) {
       triggerFetch((prevState) => !prevState);
     }
+    setInputValue("");
     console.log(response.data);
   };
 
