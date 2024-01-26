@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import List from "./listComponent";
 
-function DisplayItem({ value }) {
+function DisplayItem({ value,triggerFetch }) {
   // console.log(value);
   return (
     <>
@@ -18,7 +18,7 @@ function DisplayItem({ value }) {
               {key}
             </h2>
             <ul>
-              <List val={val} />
+              <List val={val} triggerFetch={triggerFetch}/>
             </ul>
           </div>
           // </Link>

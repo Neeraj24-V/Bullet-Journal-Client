@@ -9,7 +9,6 @@ import { Routes, Route } from "react-router-dom";
 import Auth from "./components/Authentication";
 
 function App() {
-  // const [count, setCount] = useState(0);
   return (
     <>
       <Routes>

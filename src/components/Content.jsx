@@ -61,11 +61,11 @@ function Content() {
   console.log(sortedData);
 
   return (
-    <section className="bg-slate-50">
+    <section className="bg-slate-50 select-none">
       <Navbar />
       <CreateItems triggerFetch={setTrigger}/>
       <div className="p-8 w-full bg-slate-50 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 border-white">
-        <DisplayItem value={sortedData} />
+        <DisplayItem value={sortedData} triggerFetch={setTrigger}/>
       </div>
     </section>
   );
