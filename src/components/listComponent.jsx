@@ -39,7 +39,6 @@ function List({ val, triggerFetch }) {
       );
       if (response.status == 201) {
         triggerFetch((prevState) => !prevState);
-
       }
       toast.success("Task Completed");
     } catch (err) {
@@ -61,6 +60,7 @@ function List({ val, triggerFetch }) {
         }
       );
       if (response.status == 200) {
+        triggerFetch((prevState) => !prevState);
         toast.success("Task deleted successfully");
       }
     } catch (err) {
