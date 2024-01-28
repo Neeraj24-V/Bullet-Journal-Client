@@ -1,5 +1,7 @@
 import done from "../assets/done.svg";
 import axios from "axios";
+import del from "../assets/del.svg";
+import { toast } from "react-toastify";
 
 function List({ val, triggerFetch }) {
   const getSymbols = (dataType, done) => {
@@ -20,22 +22,49 @@ function List({ val, triggerFetch }) {
   };
 
   const handleCheck = async (todoId) => {
-    const user_id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
+    try {
+      const user_id = localStorage.getItem("id");
+      const token = localStorage.getItem("token");
 
-    const response = await axios.patch(
-      `https://bullet-journal-model-api.onrender.com/api/v1/journal/data/${user_id}?todoId=${todoId}`,
-      {
-        completed: true,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.patch(
+        `https://bullet-journal-model-api.onrender.com/api/v1/journal/data/${user_id}?todoId=${todoId}`,
+        {
+          completed: true,
         },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status == 201) {
+        triggerFetch((prevState) => !prevState);
+
       }
-    );
-    if (response.status == 201) {
-      triggerFetch((prevState) => !prevState);
+      toast.success("Task Completed");
+    } catch (err) {
+      toast.error("Task Completion failed!!!");
+      console.log(err);
+    }
+  };
+
+  const handleDelete = async (todoId) => {
+    try {
+      const user_id = localStorage.getItem("id");
+      const token = localStorage.getItem("token");
+      const response = await axios.patch(
+        `https://bullet-journal-model-api.onrender.com/api/v1/journal/data/${user_id}?todoId=${todoId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status == 200) {
+        toast.success("Task deleted successfully");
+      }
+    } catch (err) {
+      toast.error("Task deletion failed!!!");
     }
   };
 
@@ -57,12 +86,22 @@ function List({ val, triggerFetch }) {
               }
             </div>
             <div>
-              {val.dataType == "Task" && (
+              {val.dataType == "Task" && !val.completed && (
                 <img
                   className="w-4 h-4 ml-4 cursor-pointer"
                   src={done}
                   alt="completed"
                   onClick={() => handleCheck(val._id)}
+                />
+              )}
+            </div>
+            <div>
+              {val.dataType == "Task" && !val.completed && (
+                <img
+                  src={del}
+                  alt="delete"
+                  className="w-4 h-4 ml-4 cursor-pointer"
+                  onClick={() => handleDelete(val._id)}
                 />
               )}
             </div>

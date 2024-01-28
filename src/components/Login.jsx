@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,25 +15,39 @@ function Login() {
     password: "",
   });
 
-  async function handleSubmit(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    const { email, password } = formData;
-    if (!email || !password) {
-      alert("Please fill out all fields");
-      return;
-    }
-    const response = await axios.post(
-      "https://bullet-journal-model-api.onrender.com/api/v1/journal/auth/login",
-      formData,
-    );
-    console.log(response);
-    const { username, id } = response.data.payload.user;
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("userEmail", response.data.payload.user.email);
-    localStorage.setItem("username", username);
-    localStorage.setItem("id", id);
-    if (response.status === 200) {
-      navigate("/journal");
+    try {
+      const { email, password } = formData;
+      if (!email || !password) {
+        alert("Please fill out all fields");
+        return;
+      }
+      const response = await axios.post(
+        "https://bullet-journal-model-api.onrender.com/api/v1/journal/auth/login",
+        formData
+      );
+      console.log(response);
+      const { user } = response.data.payload;
+
+      if (response.status === 200 && user) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userEmail", user.email);
+        localStorage.setItem("username", user.username);
+        localStorage.setItem("id", user.id);
+        navigate("/journal");
+      }
+    } catch (err) {
+      // alert("user not registered")
+      toast.error("Invalid Credentials", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   }
 
@@ -82,7 +98,7 @@ function Login() {
             />
             <button
               type="button"
-              onClick={handleSubmit}
+              onClick={handleLogin}
               className="font-Recursive text-center w-full font-semibold mt-10 bg-black py-2 text-white hover:bg-yellow-600"
             >
               Login
@@ -99,6 +115,12 @@ function Login() {
           </div>
         </div>
       </div>
+      {/* User not registered toast */}
+      {/* {isRegistered && (
+        <div className="absolute -right-[300px] bottom-[50px] font-Recursive text-white text-[18px] py-2 font-medium margin-auto text-center bg-amber-600 w-[300px] transition duration-500 ease-out">
+          User not Registered
+        </div>
+      )} */}
     </section>
   );
 }

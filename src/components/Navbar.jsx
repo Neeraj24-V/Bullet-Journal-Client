@@ -44,7 +44,7 @@ function Navbar() {
         } p-6 bg-black absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl transition-all ease-out`}
       >
         <div className="flex flex-col justify-center items-center w-full">
-          <div className="h-[50px] w-[50px] bg-blue-400 border border-black rounded-full"></div>
+          <div id="profile-pic" className="h-[50px] w-[50px] bg-blue-400 border border-black rounded-full"></div>
 
           <p className="font-Recursive text-white font-semibold mt-2">
             {localStorage.getItem("username")}
