@@ -52,7 +52,7 @@ function List({ val, triggerFetch }) {
     try {
       const user_id = localStorage.getItem("id");
       const token = localStorage.getItem("token");
-      const response = await axios.patch(
+      const response = await axios.delete(
         `https://bullet-journal-model-api.onrender.com/api/v1/journal/data/${user_id}?todoId=${todoId}`,
         {
           headers: {
