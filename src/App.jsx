@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import Auth from "./components/Authentication";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         pauseOnHover
         transition:Slide
       />
+      <SpeedInsights />
     </>
   );
 }
